@@ -16,11 +16,9 @@ public class UserService {
     }
 
     public Optional<User> findUser(String id){
-       Optional<User> user = userRepository.findByUserId(id);
+        Optional<User> user = userRepository.findByUserId(id);
 
-       /*
-       * 별도의 검증 로직 작성
-       * */
+        // 별도의 검증 로직 작성
 
         return user;
     }

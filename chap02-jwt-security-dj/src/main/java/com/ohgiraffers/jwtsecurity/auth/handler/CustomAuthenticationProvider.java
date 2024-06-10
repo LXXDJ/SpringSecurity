@@ -10,8 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-public class CustomAuthenticationProvider implements AuthenticationProvider  {
-
+public class CustomAuthenticationProvider implements AuthenticationProvider{
     @Autowired
     private DetailsService detailsService;
 
@@ -21,13 +20,11 @@ public class CustomAuthenticationProvider implements AuthenticationProvider  {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         UsernamePasswordAuthenticationToken loginToken = (UsernamePasswordAuthenticationToken) authentication;
-
         String id = loginToken.getName();
-
         String pass = (String) loginToken.getCredentials();
         DetailsUser detailsUser = (DetailsUser) detailsService.loadUserByUsername(id);
 
-        if(!passwordEncoder.matches(pass, detailsUser.getPassword())) {
+        if(!passwordEncoder.matches(pass, detailsUser.getPassword())){
             throw new BadCredentialsException(pass + "는 틀린 비밀번호입니다.");
         }
         return new UsernamePasswordAuthenticationToken(detailsUser, pass, detailsUser.getAuthorities());

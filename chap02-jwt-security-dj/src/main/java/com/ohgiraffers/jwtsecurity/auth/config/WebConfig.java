@@ -10,8 +10,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /*
-* Web configuration을 위한 클래스
-* */
+ * Web configuration을 위한 클래스
+ * */
 @Configuration
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {

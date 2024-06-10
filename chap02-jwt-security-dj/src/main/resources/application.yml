@@ -13,5 +13,5 @@ spring:
     password: ohgiraffers
 
 jwt:
-  key: asdkfjlkawddfek543154ipo1u4djskafjklas34234ydsd
+  key: asdkfjlkawdsjfw390r82309rjlkasdfja213498dlk
   time: 86400000

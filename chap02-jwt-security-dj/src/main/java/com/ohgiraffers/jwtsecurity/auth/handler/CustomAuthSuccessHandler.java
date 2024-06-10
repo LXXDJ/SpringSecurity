@@ -20,21 +20,18 @@ public class CustomAuthSuccessHandler extends SavedRequestAwareAuthenticationSuc
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
-
         User user = ((DetailsUser) authentication.getPrincipal()).getUser();
-
         JSONObject jsonValue = (JSONObject) ConvertUtil.converObjectToJsonObject(user);
-
-        HashMap<String, Object> responseMap= new HashMap<>();
-
+        HashMap<String, Object> responseMap = new HashMap<>();
         JSONObject jsonObject;
-        if(user.getState().equals("N")) {
+
+        if(user.getState().equals("N")){
             responseMap.put("userInfo", jsonValue);
             responseMap.put("message", "휴면 상태의 계정입니다.");
-        } else {
+        }else{
             String token = TokenUtils.generateJwtToken(user);
             responseMap.put("userInfo", jsonValue);
-            responseMap.put("message", "로그인 성공입니다.");
+            responseMap.put("message", "로그인 성공");
 
             response.addHeader(AuthConstants.AUTH_HEADER, AuthConstants.TOKEN_TYPE + " " + token);
         }
@@ -42,7 +39,7 @@ public class CustomAuthSuccessHandler extends SavedRequestAwareAuthenticationSuc
         jsonObject = new JSONObject(responseMap);
         response.setContentType("application/json");
         PrintWriter printWriter = response.getWriter();
-        printWriter.print(jsonObject);
+        printWriter.println(jsonObject);
         printWriter.flush();
         printWriter.close();
     }
